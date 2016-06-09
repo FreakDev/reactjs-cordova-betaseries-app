@@ -1,0 +1,7 @@
+.DS_Store
+node_modules
+previouslyOn_app/platforms/*
+!previouslyOn_app/platforms/.gitkeep
+previouslyOn_app/www/js/*
+previouslyOn_app/www/js/.*
+!previouslyOn_app/www/js/.gitkeep
