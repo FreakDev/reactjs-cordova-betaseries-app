@@ -6,6 +6,8 @@ export default class InputText extends AbstractField {
     constructor(props) {
         super(props);
 
+        this.inputType = "text";
+
     }
 
     static propTypes = {
@@ -19,9 +21,9 @@ export default class InputText extends AbstractField {
 
         var label = this.props.label ? <label htmlFor={ this.id }>{ this.props.label }</label> : '';
         return (
-            <div>
+            <div className="input-field">
+                <input id={ this.id } type={this.inputType} placeholder={ this.props.placeholder } value={ this.state.value } onChange={ this.onChange } />
                 { label }
-                <input id={ this.id } type="text" placeholder={ this.props.placeholder } value={ this.state.value } onChange={ this.onChange } />
                 <ul className="errors">
                     { this.state.errors.map( (err) => {
                         key++;

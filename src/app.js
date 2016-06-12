@@ -11,6 +11,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import store from './reducers';
 
 import Layout from './components/Layout';
+import MainContainer from './components/MainContainer';
 import Login from './components/Login';
 import Home from './components/Home';
 
@@ -25,7 +26,7 @@ const history = syncHistoryWithStore(hashHistory, store);
 render(
     <Provider store={store}>
         <Router history={history}>
-            <Route component={Layout}>
+            <Route component={MainContainer}>
                 <Route path="/login" component={Login}/>
                 <Route onEnter={requireAuth} path="/" component={Layout}>
                     <IndexRoute component={Home} />

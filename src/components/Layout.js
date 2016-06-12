@@ -1,29 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-class Layout extends React.Component {
-  static propTypes = {
-    isLoggedIn: React.PropTypes.bool.isRequired,
-  }
+export default class Layout extends React.Component {
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired,
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.props, nextProps);
-    if (this.props.isLoggedIn && !nextProps.isLoggedIn) {
-      this.context.router.push('/login');
-    } else if (!this.props.isLoggedIn && nextProps.isLoggedIn) {
-      this.context.router.push('/');
-    }
-  }
-
   render() {
-    return this.props.children;
+    return (
+      <div className="container">
+        { this.props.children }
+      </div>
+    )
+
   }
 }
-
-export default connect(state => (
-    {isLoggedIn: state.user.isLoggedIn}
-))(Layout);
