@@ -16,7 +16,7 @@ export default class AbstractField extends React.Component {
 
     }
 
-    propTypes: {
+    static propTypes = {
         name: PropTypes.string.isRequired,
         validator: PropTypes.func,
         validatorRules: PropTypes.object

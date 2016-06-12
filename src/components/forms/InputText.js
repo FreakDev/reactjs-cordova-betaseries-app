@@ -6,11 +6,12 @@ export default class InputText extends AbstractField {
     constructor(props) {
         super(props);
 
-        this.propTypes = {
-            ...super.propTypes,
-            placeholder: PropTypes.string,
-            label: PropTypes.string
-        }
+    }
+
+    static propTypes = {
+        placeholder: PropTypes.string,
+        label: PropTypes.string,
+        ...AbstractField.propTypes
     }
 
     render() {
