@@ -15,7 +15,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 
 function requireAuth (router, transition) {
-    if (!store.getState().isLoggedIn) {
+    if (!store.getState().user.isLoggedIn) {
         transition('/login');
     }
 }
@@ -25,9 +25,11 @@ const history = syncHistoryWithStore(hashHistory, store);
 render(
     <Provider store={store}>
         <Router history={history}>
-            <Route path="/login" component={Login}/>
-            <Route path="/" component={Layout}>
-              <Route path="/home" onEnter={requireAuth} component={Home}/>
+            <Route component={Layout}>
+                <Route path="/login" component={Login}/>
+                <Route onEnter={requireAuth} path="/" component={Layout}>
+                    <IndexRoute component={Home} />
+                </Route>
             </Route>
         </Router>
     </Provider>

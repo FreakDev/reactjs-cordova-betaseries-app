@@ -25,5 +25,5 @@ class Layout extends React.Component {
 }
 
 export default connect(state => (
-    {isLoggedIn: state.isLoggedIn}
+    {isLoggedIn: state.user.isLoggedIn}
 ))(Layout);
