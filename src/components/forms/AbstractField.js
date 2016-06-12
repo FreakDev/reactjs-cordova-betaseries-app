@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 
 export default class AbstractField extends React.Component {
 
-    constructor(props) {
-        super(props);
+    constructor(props, context) {
+        super(props, context);
 
         this.id = props.name + "-" + Date.now();
 
@@ -14,6 +14,10 @@ export default class AbstractField extends React.Component {
         // bindings
         this.onChange = this.onChange.bind(this);
 
+    }
+
+    static contextTypes = {
+        formData: PropTypes.object
     }
 
     static propTypes = {
@@ -27,6 +31,7 @@ export default class AbstractField extends React.Component {
         if (this.props.validator && e.target.value) {
             state.errors = this.props.validator(e.target.value, this.props.validatorRules);
         }
+        this.context.formData[this.props.name] = state;
         this.setState(state);
     }
 

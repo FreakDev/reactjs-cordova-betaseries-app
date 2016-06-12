@@ -10,6 +10,8 @@ export default class InputText extends AbstractField {
 
     }
 
+    static displayName = 'InputText';
+
     static propTypes = {
         placeholder: PropTypes.string,
         label: PropTypes.string,

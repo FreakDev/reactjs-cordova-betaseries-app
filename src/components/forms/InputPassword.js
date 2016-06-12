@@ -10,6 +10,8 @@ export default class InputPassword extends InputText {
 
     }
 
+    static displayName = 'InputPassword';
+
     static propTypes = {
         placeholder: PropTypes.string,
         label: PropTypes.string,
