@@ -5,6 +5,8 @@ import InputText from './forms/InputText';
 import InputPassword from './forms/InputPassword';
 import Form from './forms/Form';
 
+import { successFullLogin } from '../reducers/user';
+
 // import { login } from '../actions';
 
 class LoginForm extends Form {
@@ -35,9 +37,17 @@ export default connect(
     (dispatch) => {
         return {
             onSubmit: (values) => {
-                console.log('submit form', values);
                 dispatch( function () {
-                    // login(values)
+                    fetch("https://api.betaseries.com/members/auth", {
+                      method: 'POST',
+                      body: JSON.stringify(values)
+                    }).then(function (response) {
+                        if (response.status >= 200 && response.status < 300) {
+                            dispatch(successFullLogin(true))
+                        } else {
+                            dispatch(successFullLogin(false))
+                        }
+                    });
                 } );
                 return false;
             }
