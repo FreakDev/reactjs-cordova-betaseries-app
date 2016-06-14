@@ -9,5 +9,5 @@ previouslyOn_app/www/css/materialize.css
 previouslyOn_app/www/css/materialize.min.css
 previouslyOn_app/www/css/ghpages-materialize.css
 previouslyOn_app/www/css/prism.css
-previouslyOn_app/www/font
-previouslyOn_app/www/fonts
+previouslyOn_app/www/font/*
+previouslyOn_app/www/fonts/*
