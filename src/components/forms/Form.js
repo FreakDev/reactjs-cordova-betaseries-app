@@ -1,7 +1,6 @@
 
 import React, { PropTypes } from 'react';
 import AbstractField from './AbstractField';
-import { connect } from 'react-redux';
 
 export default class Form extends React.Component {
     constructor(props) {
