@@ -28,5 +28,5 @@ class MainContainer extends React.Component {
 }
 
 export default connect(state => (
-    {isLoggedIn: state.user.isLoggedIn}
+    {isLoggedIn: !state.user.infos.login}
 ))(MainContainer);

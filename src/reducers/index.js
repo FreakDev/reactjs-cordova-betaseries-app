@@ -3,11 +3,22 @@ import { combineReducers, createStore, applyMiddleware } from 'redux'
 import { connect } from 'react-redux';
 
 import { default as user } from './user'
+import { default as login } from './login'
+
 import { routerReducer as routing } from 'react-router-redux';
 
-const app = createStore(combineReducers({
+export default createStore(combineReducers({
     user,
+    login,
     routing,
 }), window.devToolsExtension && window.devToolsExtension(), applyMiddleware (thunkMiddleware));
 
-export default app
+export const triggerAction = (type, payload = {}) => {
+    if (!type) {
+        throw Error("can't trigger action with no type");
+    }
+    return {
+        type: type,
+        payload
+    }
+}

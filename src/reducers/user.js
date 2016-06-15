@@ -1,44 +1,15 @@
 
 import { combineReducers } from 'redux';
 
+import { default as loginActions } from './login';
+
 export default combineReducers({
-    "isLoggedIn": (state = false, action) => {
-        switch (action.type) {
-        case 'LOGIN':
-          return true;
-        case 'LOGOUT':
-          return false;
-        default:
-          return state;
-        }
-    },
-    authResult: (state = true, action) => {
-        switch (action.type) {
-        case 'LOGIN':
-          return true;
-        case undefined:
-            return false;
-        default:
-          return state;
-        }
-    },
-    "loading": (state = false, action) => {
-        switch (action.type) {
-        case 'LOGIN':
-          return true;
-        case 'LOGOUT':
-          return false;
-        default:
-          return state;
-        }        
-    },
     "infos": (state = {login: "", token: ""}, action) => {
-        return state;
+        switch (action.type) {
+        case loginActions.LOGIN_SUCCESSFULL:
+          return action.payload;
+        default:
+          return state;
+        }
     }
 });
-
-export var successFullLogin = (success) => {
-    if (success) {
-        return {type: 'LOGIN'};
-    }
-}
