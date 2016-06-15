@@ -14,15 +14,40 @@ import {default as loginActions } from '../reducers/loginActions';
 import BetaSeries from '../BetaSeries';
 import API_KEY from '../apikey';
 
-var overlayStyle = {}
+import { hashHistory } from 'react-router'
+
+
+var overlayContainerStyle = {
+    "position": "absolute",
+}
+
+
+var overlayStyle = {
+    "position": "absolute",
+    "top": 0,
+    "left": 0,
+    "width": "100%",
+    "height": "100%",
+    "backgroundColor": "rgba(255,255,255, 0.7)",
+    "zIndex": 10
+}
+
+var loaderStyle = {
+    "left": "50%",
+    "top": "35%"
+}
 
 class LoginForm extends Form {
 
     constructor(props) {
         super(props);
 
-        overlayStyle.display = this.props.isLoading ? 'block' : 'none';
+        overlayStyle.display = props.isLoading ? 'block' : 'none';
 
+    }
+
+    static contextTypes = {
+        router: React.PropTypes.object.isRequired,
     }
 
     static propTypes = {
@@ -30,15 +55,34 @@ class LoginForm extends Form {
         onSubmit: PropTypes.func.isRequired
     }
 
+    componentWillReceiveProps(nextProps) {
+
+        overlayStyle.display = nextProps.isLoading ? 'block' : 'none';
+
+    }
+
+
     render() {
         return (
-            <div className="overlay-container">
+            <div className="container overlay-container" style={ overlayContainerStyle }>
                 <Form onSubmit={ this.props.onSubmit } >
                     <span>{ this.props.authResult ? '' : 'login failed' }</span>
                     <InputText validator={ notEmpty } name="login" label="login"/>
                     <InputPassword validator={ notEmpty } name="password" label="password" />
                 </Form>
-                <div className="overlay" style={ overlayStyle }></div>
+                <div className="overlay" style={ Object.assign({}, overlayStyle) }>
+                    <div style={ loaderStyle } className="preloader-wrapper small active">
+                        <div className="spinner-layer spinner-green-only">
+                          <div className="circle-clipper left">
+                            <div className="circle"></div>
+                          </div><div className="gap-patch">
+                            <div className="circle"></div>
+                          </div><div className="circle-clipper right">
+                            <div className="circle"></div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
             </div>
         )
     }
@@ -48,7 +92,8 @@ export default connect(
     (state) => {
         return { 
             authResult: state.login.authResult,
-            isLoading: state.login.isLoading
+            isLoading: state.login.isLoading,
+            isLoggedIn: !!state.user.infos.login
         } 
     }, 
     (dispatch) => {
