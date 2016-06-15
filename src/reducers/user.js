@@ -1,13 +1,13 @@
 
 import { combineReducers } from 'redux';
 
-import { default as loginActions } from './login';
+import loginActions from './loginActions';
 
 export default combineReducers({
     "infos": (state = {login: "", token: ""}, action) => {
         switch (action.type) {
-        case loginActions.LOGIN_SUCCESSFULL:
-          return action.payload;
+        case loginActions.LOGIN_SUCCESSFUL:
+          return { login: action.payload.user.login, token: action.payload.token };
         default:
           return state;
         }
