@@ -13,7 +13,8 @@
     "react-router": "^2.4.1",
     "react-router-redux": "^4.0.5",
     "redux": "^3.3.1",
-    "redux-thunk": "^2.0.1"
+    "redux-thunk": "^2.0.1",
+    "blueimp-md5": "^2.3.0"
   },
   "devDependencies": {
     "babel-plugin-syntax-decorators": "^6.8.0",
