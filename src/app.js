@@ -17,7 +17,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 
 function requireAuth (router, transition) {
-    if (!store.getState().user.isLoggedIn) {
+    if (!store.getState().user.infos.login) {
         transition('/login');
     }
 }
