@@ -1,10 +1,13 @@
 
 import length from './length';
 import isNumber from './isnumber';
+import notEmpty from './notempty';
+
 
 var validators = {
     length,
-    isNumber
+    isNumber,
+    notEmpty
 }
 
 function combineValidators () {
@@ -20,4 +23,4 @@ function combineValidators () {
     }
 }
 
-export { combineValidators, length, isNumber };
+export { combineValidators, length, isNumber, notEmpty };
