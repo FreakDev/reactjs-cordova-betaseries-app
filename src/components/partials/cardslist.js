@@ -2,19 +2,21 @@ import React from 'react';
 
 import CardImage from './cardimage';
 
+var listStyle = {
+    "marginTop": "70px"
+}
+
 export default class CardsList extends React.Component {
 
     render() {
-        let i = 0;
         return (
-            <div>
+            <div style={ listStyle } className="container">
                 {
                     this.props.items.map((item) => {
                         console.log("render item");
                         return (
-                            <CardImage key={ i } title={ item.title } />
+                            <CardImage key={ item.id } data={ item } />
                         );
-                        i++
                     })
                 }
             </div>
