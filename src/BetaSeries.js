@@ -9,7 +9,9 @@ export default class BetaSeries {
     }
 
     static API = {
-        "login": {"method": "post", "url": "https://api.betaseries.com/members/auth" }        
+        "login": {"method": "post", "url": "https://api.betaseries.com/members/auth" },
+        "favorite": {"method": "get", "url": "https://api.betaseries.com/shows/favorites" },
+        "shows": {"method": "get", "url": "https://api.betaseries.com/members/infos" }
     };
 
     static getInstance = (key) => {
@@ -20,7 +22,24 @@ export default class BetaSeries {
     }
 
     wrapApiKey(url) {
-        return url + "?key=" + this.apiKey;
+        return url + (url.indexOf("?") === -1 ? "?" : "&") + "key=" + this.apiKey;
+    }
+
+    fetch(url, options) {
+        let p = new Promise((r, f) => {        
+            fetch(url, options).then((response) => {
+                if (response.status >= 200 && response.status < 300) {
+                    response.json().then((data) => {
+                        r(data, response);
+                    })
+                } else {
+                    f();
+                }
+            }, () => {
+                f();
+            });
+        });
+        return p;
     }
 
     login (login, password) {
@@ -32,6 +51,13 @@ export default class BetaSeries {
             "method": BetaSeries.API.login.method,
             "body": fd
         });
+    }
+
+    getShows(id) {
+        return this.fetch (this.wrapApiKey(BetaSeries.API.shows.url + "?id=" + id + "&only=shows"), { 
+            "method": BetaSeries.API.favorite.method,
+            "mode":  "no-cors"
+        });        
     }
 
 }

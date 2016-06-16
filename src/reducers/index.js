@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 
 import { default as user } from './user'
 import { default as login } from './login'
+import { default as shows } from './shows'
+
 
 import { routerReducer as routing } from 'react-router-redux';
 
 export default createStore(combineReducers({
     user,
     login,
+    shows,
     routing,
 }), window.devToolsExtension && window.devToolsExtension(), applyMiddleware (thunkMiddleware));
 
