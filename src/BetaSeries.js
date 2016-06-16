@@ -26,18 +26,12 @@ export default class BetaSeries {
     }
 
     fetch(url, options) {
-        let p = new Promise((r, f) => {        
-            fetch(url, options).then((response) => {
-                if (response.status >= 200 && response.status < 300) {
-                    response.json().then((data) => {
-                        r(data, response);
-                    })
-                } else {
-                    f();
-                }
-            }, () => {
+        let p = new Promise((r, f) => {
+            $.ajax({url, ...options, dataType: 'json', success: (response) => {
+                r(response);
+            }, error :() => {
                 f();
-            });
+            }});
         });
         return p;
     }
