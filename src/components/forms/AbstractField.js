@@ -34,29 +34,31 @@ export default class AbstractField extends React.Component {
 
     componentWillMount () {
         this.setState({value:this.props.value});
+    }
 
-        this.context.formData[this.props.name] = this.state;
+    validate(val) {
+        let errors, value = val === undefined ? this.state.value : val;
+        if (this.props.validator && value !== undefined) {
+            errors = this.props.validator(value, this.props.validatorRules);
+            
+        }
+        this.setState({ errors });
+        return !!errors.length
     }
 
     setState(state) {
-
-        if (this.props.validator && state.value) {
-            state.errors = this.props.validator(state.value, this.props.validatorRules);
-        }
-
-        super.setState(state)
+        super.setState(state);
+        this.context.formData[this.props.name] = Object.assign({}, this.context.formData[this.props.name], state);        
     }
 
-    componentWillReceiveProps (nextProps) {
-        if (this.context.formData[this.props.name]) {
-            this.setState(this.context.formData[this.props.name]);
-        }
+    componentWillReceiveProps (nextProps) { 
+        this.setState({ value: nextProps.value });
+        this.validate(nextProps.value);
     }
 
     onChange(e) {
-        var state = { value: e.target.value, errors: [] };
-        this.setState(state);
-        this.context.formData[this.props.name] = state;        
+        this.setState({ value: e.target.value });
+        this.validate(e.target.value);
     }
 
     render() {

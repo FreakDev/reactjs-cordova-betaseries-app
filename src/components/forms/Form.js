@@ -9,7 +9,7 @@ export default class Form extends React.Component {
         this.formData = {};
 
         // bindings
-        this.onClick = this.onClick.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     static propTypes = {
@@ -28,7 +28,7 @@ export default class Form extends React.Component {
         return { formData: this.formData };
     }
 
-    onClick() {
+    onSubmit() {
         var hasErrors = false;
         var values = {};
 
@@ -44,15 +44,29 @@ export default class Form extends React.Component {
 
         this.setState({hasErrors});
 
-        !hasErrors && this.props.onSubmit(values);
+        if (!hasErrors) {
+            if (this.props.onSubmit) {
+                e.preventDefault();
+                this.props.onSubmit(values);
+            }
+        }
+    }
+
+    renderChildren(children) {
+        const newChild = React.Children.map(children, (child) => {
+            let newValue = this.formData[child.props.name] ? this.formData[child.props.name].value : "";
+            return React.cloneElement(child, {value: newValue });
+        });
+
+        return newChild;
     }
 
     render() {
         return (
-            <div>
-                { this.props.children }
-                <button onClick={ this.onClick } className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
-            </div>
+            <form onSubmit={ this.onSubmit }>
+                { this.renderChildren(this.props.children) }
+                <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+            </form>
         )
     }
 }
