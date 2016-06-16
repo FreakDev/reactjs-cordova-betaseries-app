@@ -1,12 +1,12 @@
 
 export default (value, opt) => {
 
-    var errors = [];
 
     if (! (value !== "" && value !== null && value !== undefined)) {
-        errors.push('Should not be empty');
+        console.log('not empty test value : "' + value + '"');
+        return ['Should not be empty'];
     }
 
-    return errors;
+    return [];
 
 }

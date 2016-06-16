@@ -20,6 +20,10 @@ export default class Form extends React.Component {
         formData: PropTypes.object
     }
 
+    state = {
+        hasErrors: false
+    }
+
     getChildContext() {
         return { formData: this.formData };
     }
@@ -28,18 +32,19 @@ export default class Form extends React.Component {
         var hasErrors = false;
         var values = {};
 
-        Object.keys(this.formData).forEach((key) => {
-            var field = this.formData[key];
-            if (field.errors.length) {
-                hasErrors = true;
-            } else {
-                values[key] = field.value;
+        let i = 0;
+        this.props.children.forEach((child) => {
+            if (child.props.validator) {
+                hasErrors = !!child.props.validator(
+                                this.formData[child.props.name].value, child.props.validatorRules || {})
+                            || hasErrors;
             }
+            i++
         });
 
-        if (!hasErrors) {
-            this.props.onSubmit(values);
-        }
+        this.setState({hasErrors});
+
+        !hasErrors && this.props.onSubmit(values);
     }
 
     render() {
