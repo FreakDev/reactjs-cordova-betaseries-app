@@ -8,8 +8,8 @@ export default combineReducers({
         switch (action.type) {
         case showsActions.HOME_REFRESH:
           return true;
-        case showsActions.HOME_LOAD_DONE:
-        case showsActions.HOME_LOAD_FAIL:
+        case showsActions.SHOWS_LOAD_DONE:
+        case showsActions.SHOWS_LOAD_FAIL:
           return false;
         default:
           return state;
@@ -17,7 +17,7 @@ export default combineReducers({
     },
     list: (state = [], action) => {
         switch (action.type) {
-        case showsActions.HOME_LOAD_DONE:
+        case showsActions.SHOWS_LOAD_DONE:
           return action.payload.member.shows;
         default:
           return state;

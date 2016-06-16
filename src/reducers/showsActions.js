@@ -16,7 +16,7 @@ const bs = BetaSeries.getInstance(APIKEY.key);
 export const refreshList = (uid, dispatch) => {
     dispatch(triggerAction(ACTION.SHOWS_REFRESH))
 
-    bs.getShows(uid).then((response) => {
+    bs.getShows(uid).then((data) => {
         dispatch(triggerAction(ACTION.SHOWS_LOAD_DONE, data));
     }, () => {
         dispatch(triggerAction(ACTION.SHOWS_LOAD_FAIL));
