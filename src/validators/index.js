@@ -7,7 +7,7 @@ import notEmpty from './notempty';
 var validators = {
     length,
     isNumber,
-    notEmpty
+    notEmpty,
 }
 
 function combineValidators () {
