@@ -24,6 +24,10 @@ export default class Layout extends React.Component {
     router: React.PropTypes.object.isRequired,
   }
 
+  componentWillReceiveProps (nextProps) {
+    sideMenuStyle.left = nextProps.sideMenuOpen ? "0" : "-80%";
+  }
+
   render() {
     return (
       <div style={ layoutStyle } className="layout">
