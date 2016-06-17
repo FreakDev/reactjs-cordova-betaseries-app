@@ -3,7 +3,7 @@ import React from 'react';
 import CardImage from './cardimage';
 
 var listStyle = {
-    "marginTop": "70px"
+    "paddingTop": "70px"
 }
 
 export default class CardsList extends React.Component {
