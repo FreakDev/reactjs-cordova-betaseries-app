@@ -29,7 +29,6 @@ export default class AbstractField extends React.Component {
         name: PropTypes.string.isRequired,
         validator: PropTypes.func,
         validatorRules: PropTypes.object,
-        value: PropTypes.string
     }
 
     componentWillMount () {
@@ -37,7 +36,7 @@ export default class AbstractField extends React.Component {
     }
 
     validate(val) {
-        let errors, value = val === undefined ? this.state.value : val;
+        let errors = [], value = val === undefined ? this.state.value : val;
         if (this.props.validator && value !== undefined) {
             errors = this.props.validator(value, this.props.validatorRules);
             

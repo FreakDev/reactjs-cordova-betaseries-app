@@ -32,16 +32,18 @@ export default class Form extends React.Component {
         var errors = [];
         var values = {};
 
-        let i = 0;
         this.props.children.forEach((child) => {
-            if (child.props.validator) {
-                let err = child.props.validator(this.formData[child.props.name].value, child.props.validatorRules || {});
-                if (!err.length) {
-                    values[child.props.name] = this.formData[child.props.name].value;
+            if (child.props.name) {
+                if (child.props.validator) {
+                    let err = child.props.validator(this.formData[child.props.name].value, child.props.validatorRules || {});
+                    if (!err.length) {
+                        values[child.props.name] = this.formData[child.props.name].value;
+                    }
+                    errors = [...errors, ...err];                    
+                } else {
+                    values[child.props.name] = this.formData[child.props.name].value;                    
                 }
-                errors = [...errors, ...err];
             }
-            i++
         });
 
         this.setState({ hasErrors: !!errors.length });
