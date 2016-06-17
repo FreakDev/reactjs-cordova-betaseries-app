@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import InputText from './forms/InputText';
 import InputPassword from './forms/InputPassword';
+import InputCheckbox from './forms/InputCheckbox';
 import Form from './forms/Form';
 
 import { notEmpty } from '../validators'
@@ -69,6 +70,7 @@ class LoginForm extends Form {
                     <span>{ this.props.authResult ? '' : 'login failed' }</span>
                     <InputText validator={ notEmpty } name="login" label="login"/>
                     <InputPassword validator={ notEmpty } name="password" label="password" />
+                    <InputCheckbox name="rememberMe" label="Remember Me" />
                 </Form>
                 <div className="overlay" style={ Object.assign({}, overlayStyle) }>
                     <div style={ loaderStyle } className="preloader-wrapper small active">
@@ -105,12 +107,15 @@ export default connect(
                 dispatch( function () {
                     var api = BetaSeries.getInstance(API_KEY.key);
 
-                    api.login(
-                        values.login, values.password
-                    )
+                    api.login( values.login, values.password )
                         .then(function (response) {
                             if (response.status >= 200 && response.status < 300) {
-                                response.json().then((data) => dispatch(triggerAction(loginActions.LOGIN_SUCCESSFUL, data)) )
+
+                                response.json().then((data) => {
+                                    Object.assign(data, {rememberMe: values.rememberMe})
+
+                                    dispatch(triggerAction(loginActions.LOGIN_SUCCESSFUL, data)) 
+                                })
                             } else {
                                 dispatch(triggerAction(loginActions.LOGIN_FAIL));
                             }

@@ -14,7 +14,9 @@ export default combineReducers({
         switch (action.type) {
         case loginActions.LOGIN_SUCCESSFUL:
             let userData = { login: action.payload.user.login, token: action.payload.token, id: action.payload.user.id };
-            store.set("user", userData);
+            if (action.payload.rememberMe) {
+                store.set("user", userData);
+            }
             return userData;
         default:
             var defaultState = userStoredInfos || state;
