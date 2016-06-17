@@ -11,6 +11,8 @@ import { notEmpty } from '../validators'
 import { triggerAction } from '../reducers';
 
 import {default as loginActions } from '../reducers/loginActions';
+import { actions as userActions } from '../reducers/user';
+
 
 import BetaSeries from '../BetaSeries';
 import API_KEY from '../apikey';
@@ -54,6 +56,10 @@ class LoginForm extends Form {
     static propTypes = {
         authResult: PropTypes.bool,
         onSubmit: PropTypes.func.isRequired
+    }
+
+    componentWillMount() {
+        this.props.onLoad();
     }
 
     componentWillReceiveProps(nextProps) {
@@ -101,6 +107,9 @@ export default connect(
     (dispatch) => {
         
         return {
+            onLoad: () => {
+                dispatch(triggerAction(userActions.USER_LOGOUT))
+            },
             onSubmit: (values) => {
                 dispatch(triggerAction(loginActions.LOGIN_TRY));
 
