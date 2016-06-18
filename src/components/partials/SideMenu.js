@@ -6,6 +6,8 @@ import { actions } from '../../reducers/sidemenu';
 
 import { Link } from 'react-router';
 
+import is from 'is';
+
 const menuWrapperRefStyle = {
   position: "absolute",
   top: "0",
@@ -47,6 +49,10 @@ class Layout extends React.Component {
     router: React.PropTypes.object.isRequired,
   }
 
+  renderItemContent(item) {
+    return 
+  }
+
   render() {
 
     var menuWrapperStyle = Object.assign({}, menuWrapperRefStyle, { left: this.props.sideMenuOpen ? "0" : "-98%", backgroundColor: this.props.sideMenuOpen ? "rgba(0,0,0,0.7)" : ""});
@@ -57,11 +63,19 @@ class Layout extends React.Component {
       <div onClick={ this.props.onClick } style={ menuWrapperStyle } className="side-panel">
         <div style={ sideMenuStyle }>
           <ul className="side-nav" style={ sideNavStyle }>
-            { this.props.items.map((item) => (
-              <li style={itemStyle} key={ id++ } className="no-padding waves-effect waves-teal">
-                <Link style={ itemStyle } to={"/" + item.toLowerCase()}>{item}</Link>
-              </li>
-            ))}
+            { Object.keys(this.props.items).map((key) => {
+             
+                let item = this.props.items[key]
+                return is.string(item) ? (
+                  <li style={itemStyle} key={ id++ } className="no-padding waves-effect waves-teal">
+                      <Link style={ itemStyle } to={ key }>{item}</Link>
+                  </li>
+                ) : (
+                  <li style={itemStyle} key={ id++ } className="no-padding">
+                    { item }
+                  </li>
+                )
+            })}
           </ul>
         </div>
       </div>
