@@ -22,7 +22,7 @@ export default class AbstractField extends React.Component {
     state = { value: "", errors: [] }
 
     static contextTypes = {
-        formData: PropTypes.object.isRequired,
+        formData: PropTypes.object,
     }
 
     static propTypes = {
@@ -47,7 +47,9 @@ export default class AbstractField extends React.Component {
 
     setState(state) {
         super.setState(state);
-        this.context.formData[this.props.name] = Object.assign({}, this.context.formData[this.props.name], state);        
+        if (this.context && this.context.formData) {
+            this.context.formData[this.props.name] = Object.assign({}, this.context.formData[this.props.name], state);        
+        }
     }
 
     componentWillReceiveProps (nextProps) { 
@@ -58,6 +60,9 @@ export default class AbstractField extends React.Component {
     onChange(e) {
         this.setState({ value: e.target.value });
         this.validate(e.target.value);
+        if (this.props.onChange) {
+            this.props.onChange.call(this, e)
+        }
     }
 
     render() {
