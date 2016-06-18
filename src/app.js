@@ -15,6 +15,7 @@ import Layout from './components/Layout';
 import MainContainer from './components/MainContainer';
 import Login from './components/Login';
 import Home from './components/Home';
+import Search from './components/Search';
 
 function requireAuth (router, transition) {
     if (!store.getState().user.infos.login) {
@@ -31,6 +32,7 @@ render(
                 <Route path="/login" component={Login}/>
                 <Route onEnter={requireAuth} path="/" component={Layout}>
                     <IndexRoute component={Home} />
+                    <Route path="/search" component={Search} />
                 </Route>
             </Route>
         </Router>

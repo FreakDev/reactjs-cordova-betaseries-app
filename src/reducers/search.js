@@ -6,19 +6,19 @@ import { default as showsActions } from './showsActions';
 export default combineReducers({
     isLoading: (state = false, action) => {
         switch (action.type) {
-        case showsActions.SHOWS_REFRESH:
+        case showsActions.SHOWS_SEARCH:
           return true;
-        case showsActions.SHOWS_LOAD_DONE:
-        case showsActions.SHOWS_LOAD_FAIL:
+        case showsActions.SHOWS_SEARCH_DONE:
+        case showsActions.SHOWS_SEARCH_FAIL:
           return false;
         default:
           return state;
         }
     },
-    list: (state = [], action) => {
+    shows: (state = [], action) => {
         switch (action.type) {
-        case showsActions.SHOWS_LOAD_DONE:
-          return action.payload.member.shows;
+        case showsActions.SHOWS_SEARCH_DONE:
+          return action.payload.shows;
         default:
           return state;
         }

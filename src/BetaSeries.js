@@ -11,7 +11,8 @@ export default class BetaSeries {
     static API = {
         "login": {"method": "post", "url": "https://api.betaseries.com/members/auth" },
         "favorite": {"method": "get", "url": "https://api.betaseries.com/shows/favorites" },
-        "shows": {"method": "get", "url": "https://api.betaseries.com/members/infos" }
+        "shows": {"method": "get", "url": "https://api.betaseries.com/members/infos" },
+        "searchShows": {"method": "get", "url": "https://api.betaseries.com/shows/search" }
     };
 
     static getInstance = (key) => {
@@ -47,11 +48,26 @@ export default class BetaSeries {
         });
     }
 
-    getShows(id) {
+    getMyShows(id) {
         return this.fetch (this.wrapApiKey(BetaSeries.API.shows.url + "?id=" + id + "&only=shows"), { 
-            "method": BetaSeries.API.favorite.method,
+            "method": BetaSeries.API.shows.method,
             "mode":  "no-cors"
         });        
+    }
+
+    searchShows(title) {
+        let p = new Promise((r, f) => {
+            this.fetch (this.wrapApiKey(BetaSeries.API.searchShows.url + "?title=" + encodeURIComponent(title) ), { 
+                "method": BetaSeries.API.searchShows.method,
+                "mode":  "no-cors"
+            }).then((data) => {
+                r(data);
+            }, (e) => {
+                f(e)
+            })
+        });
+
+        return p;
     }
 
 }

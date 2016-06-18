@@ -27,7 +27,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div style={ layoutStyle } className="layout">
-        <SideMenu items={ ["Home", "Login"]} />
+        <SideMenu items={ {"logo": (<div></div>),  "/": "Home", "/search": "Search" } } />
         { this.props.children }
       </div>
     )

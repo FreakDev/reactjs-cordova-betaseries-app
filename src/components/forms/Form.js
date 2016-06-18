@@ -69,7 +69,9 @@ export default class Form extends React.Component {
         return (
             <form onSubmit={ this.onSubmit }>
                 { this.renderChildren(this.props.children) }
-                <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                <div className="input-field">
+                    <button className="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+                </div>
             </form>
         )
     }
