@@ -13,7 +13,6 @@ export default class CardsList extends React.Component {
             <div style={ listStyle } className="container">
                 {
                     this.props.items.map((item) => {
-                        console.log("render item");
                         return (
                             <CardImage key={ item.id } data={ item } />
                         );
