@@ -15,7 +15,7 @@ const inputStyle = {
     width: "100%",
     height: "45px",
     margin: "0",
-    padding: "0 45px 0 15px",
+    padding: "0 45px 0 45px",
     border: "0",
     boxShadow: "none"
 }
@@ -27,7 +27,7 @@ export default class SearchBar extends React.Component {
 
         this.onChange = this.onChange.bind(this)
 
-        this.state = {value: this.props.value || ""}
+        this.state = { value: this.props.value || "" }
     }
 
     onChange(e) {
@@ -39,7 +39,7 @@ export default class SearchBar extends React.Component {
     render() {
         return (
             <div style={ this.props.style } className="search-wrapper card">
-                <InputText onChange={ this.onChange } value={ this.state.value } style={ inputStyle } id="search" name="search" noWrapper="false" /><i  style={ iconStyle } className="material-icons">search</i>
+                <InputText placeholder="Search" onChange={ this.onChange } value={ this.state.value } style={ inputStyle } id="search" name="search" noWrapper="false" /><i  style={ iconStyle } className="material-icons">search</i>
             </div>
         )
     }
