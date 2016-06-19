@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import store from './reducers';
+import store, { triggerAction } from './reducers';
 
 import Layout from './components/Layout';
 import MainContainer from './components/MainContainer';
@@ -17,7 +17,10 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Search from './components/Search';
 
+import { actions } from './reducers/user';
+
 function requireAuth (router, transition) {
+    store.dispatch(triggerAction(actions.USER_AUTOLOGIN))
     if (!store.getState().user.infos.login) {
         transition('/login');
     }

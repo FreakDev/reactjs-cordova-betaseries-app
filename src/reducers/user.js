@@ -6,28 +6,28 @@ import loginActions from './loginActions';
 import store from 'store';
 
 export const actions = {
-    "USER_LOGOUT": "USER_LOGOUT"
+    "USER_LOGOUT": "USER_LOGOUT",
+    "USER_AUTOLOGIN": "USER_AUTOLOGIN"
 }
 
-export default combineReducers({
-    "infos": (state = {login: "", token: ""}, action) => {
+let defaultUserData = {login: "", token: "", id: ""};
 
-        let userStoredInfos = store.has('user') ? store.get('user') : false;
+export default combineReducers({
+    "infos": (state = defaultUserData, action) => {
 
         switch (action.type) {
         case loginActions.LOGIN_SUCCESSFUL:
             let userData = { login: action.payload.user.login, token: action.payload.token, id: action.payload.user.id };
             if (action.payload.rememberMe) {
                 store.set("user", userData);
-                userStoredInfos = userData;
             }
             return userData;
+        case actions.USER_AUTOLOGIN:
+            return store.has('user') ? store.get('user') : state;
         case actions.USER_LOGOUT:
-            let defaultUserData = {login: "", token: ""};
-            store.set("user", {login: "", token: ""});
+            store.remove("user");
             return defaultUserData;
         default:
-            var defaultState = userStoredInfos || state;
             return state;
         }
     }

@@ -5,6 +5,8 @@ import { triggerAction } from '../reducers';
 import { actions } from '../reducers/sidemenu';
 
 import SideMenu from './partials/SideMenu';
+import Logout from './partials/logout';
+
 
 var layoutStyle = {
   position: "absolute",
@@ -27,7 +29,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div style={ layoutStyle } className="layout">
-        <SideMenu items={ {"logo": (<div></div>),  "/": "Home", "/search": "Search" } } />
+        <SideMenu items={ {"/": "Home", "/search": "Search", "/login": (<Logout />) } } />
         { this.props.children }
       </div>
     )

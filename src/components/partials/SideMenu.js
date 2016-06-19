@@ -71,7 +71,7 @@ class Layout extends React.Component {
                       <Link style={ itemStyle } to={ key }>{item}</Link>
                   </li>
                 ) : (
-                  <li style={itemStyle} key={ id++ } className="no-padding">
+                  <li style={itemStyle} key={ id++ } className="no-padding waves-effect waves-teal" >
                     { item }
                   </li>
                 )
