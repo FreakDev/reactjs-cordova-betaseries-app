@@ -5,6 +5,7 @@ import { triggerAction } from '../../reducers';
 import { actions } from '../../reducers/sidemenu';
 
 import { Link } from 'react-router';
+import Logo from './logo';
 
 import is from 'is';
 
@@ -62,6 +63,7 @@ class Layout extends React.Component {
     return (
       <div onClick={ this.props.onClick } style={ menuWrapperStyle } className="side-panel">
         <div style={ sideMenuStyle }>
+          <Logo />
           <ul className="side-nav" style={ sideNavStyle }>
             { Object.keys(this.props.items).map((key) => {
              
