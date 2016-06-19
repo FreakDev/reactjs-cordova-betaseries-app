@@ -12,18 +12,18 @@ import is from 'is';
 const menuWrapperRefStyle = {
   position: "absolute",
   top: "0",
-  left: "-98%",
+  transform: "translateX(-100%)",
   width: "100%",
   height: "100%",
   zIndex: 10,
-  transition: "background-color 0.1s",
+  transition: "background-color 0.5s",
 }
 
 const sideMenuRefStyle = {
   position: "relative",
   width: "65%",
   height: "100%",
-  left:"-65%",
+  transform: "translateX(-65%)",
   backgroundColor: "white",
   transition: "all 0.7s",
 }
@@ -56,8 +56,8 @@ class Layout extends React.Component {
 
   render() {
 
-    var menuWrapperStyle = Object.assign({}, menuWrapperRefStyle, { left: this.props.sideMenuOpen ? "0" : "-98%", backgroundColor: this.props.sideMenuOpen ? "rgba(0,0,0,0.7)" : ""});
-    var sideMenuStyle = Object.assign({}, sideMenuRefStyle, { left: this.props.sideMenuOpen ? "0" : "-65%"});
+    var menuWrapperStyle = Object.assign({}, menuWrapperRefStyle, { transform: this.props.sideMenuOpen ? "translateX(0)" : "translateX(-100%)", backgroundColor: this.props.sideMenuOpen ? "rgba(0,0,0,0.7)" : ""});
+    var sideMenuStyle = Object.assign({}, sideMenuRefStyle, { transform: this.props.sideMenuOpen ? "translateX(0)" : "translateX(-65%)"});
 
     let id = 0;
     return (
