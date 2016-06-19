@@ -29,10 +29,10 @@ render(
     <Provider store={store}>
         <Router history={history}>
             <Route component={MainContainer}>
-                <Route path="/login" component={Login}/>
+                <Route path="login" component={Login}/>
                 <Route onEnter={requireAuth} path="/" component={Layout}>
                     <IndexRoute component={Home} />
-                    <Route path="/search" component={Search} />
+                    <Route path="search" component={Search} />
                 </Route>
             </Route>
         </Router>
