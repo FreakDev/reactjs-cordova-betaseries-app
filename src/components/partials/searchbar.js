@@ -12,7 +12,7 @@ const inputStyle = {
     display: "block",
     fontSize: "16px",
     fontWeight: "300",
-    width: "100%",
+    width: "75%",
     height: "45px",
     margin: "0",
     padding: "0 45px 0 45px",
