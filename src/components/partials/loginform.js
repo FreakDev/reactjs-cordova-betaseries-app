@@ -1,21 +1,21 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import InputText from './forms/InputText';
-import InputPassword from './forms/InputPassword';
-import InputCheckbox from './forms/InputCheckbox';
-import Form from './forms/Form';
+import InputText from '../forms/InputText';
+import InputPassword from '../forms/InputPassword';
+import InputCheckbox from '../forms/InputCheckbox';
+import Form from '../forms/Form';
 
-import { notEmpty } from '../validators'
+import { notEmpty } from '../../validators'
 
-import { triggerAction } from '../reducers';
+import { triggerAction } from '../../reducers';
 
-import {default as loginActions } from '../reducers/loginActions';
-import { actions as userActions } from '../reducers/user';
+import {default as loginActions } from '../../reducers/loginActions';
+import { actions as userActions } from '../../reducers/user';
 
 
-import BetaSeries from '../BetaSeries';
-import API_KEY from '../apikey';
+import BetaSeries from '../../BetaSeries';
+import API_KEY from '../../apikey';
 
 import { hashHistory } from 'react-router'
 
@@ -58,9 +58,9 @@ class LoginForm extends Form {
         onSubmit: PropTypes.func.isRequired
     }
 
-    componentWillMount() {
-        this.props.onLoad();
-    }
+    // componentWillMount() {
+    //     this.props.onLoad();
+    // }
 
     componentWillReceiveProps(nextProps) {
 
@@ -107,9 +107,9 @@ export default connect(
     (dispatch) => {
         
         return {
-            onLoad: () => {
-                dispatch(triggerAction(userActions.USER_LOGOUT))
-            },
+            // onLoad: () => {
+            //     dispatch(triggerAction(userActions.USER_LOGOUT))
+            // },
             onSubmit: (values) => {
                 dispatch(triggerAction(loginActions.LOGIN_TRY));
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoginForm from './LoginForm'
+import LoginForm from './partials/loginform'
 
 export default class Login extends React.Component {
     render() {
